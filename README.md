@@ -39,6 +39,8 @@
 - http://127.0.0.1:8000/api/v1/imagens/id/ # retorna uma imagem pelo id
 - http://127.0.0.1:8000/api/v1/analises/ # retorna todas as analises
 - http://127.0.0.1:8000/api/v1/analises/id/ # retorna uma analise pelo id
+- http://127.0.0.1:8000/api/v1/imagens/?search=<nome>/ # pesquisa por nome da imagem
+- http://127.0.0.1:8000/api/v1/analises/?search=<nome>/ # pesquisa por nome da analise
 
 ### Exemplos de entrada para os endpoints
 
