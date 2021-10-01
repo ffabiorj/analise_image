@@ -46,6 +46,14 @@ def test_view_get_all_images(client, create_models):
 
 
 @pytest.mark.django_db
+def test_view_search_imagem_by_name(client, create_models):
+    url = "http://127.0.0.1:8000/api/v1/imagens/?search=teste1/"
+    response = client.get(url)
+    assert response
+    assert response.status_code == status.HTTP_200_OK
+
+
+@pytest.mark.django_db
 def test_view_get_single_image(client, create_models):
     url = "http://127.0.0.1:8000/api/v1/imagens/1/"
     response = client.get(url)
@@ -122,6 +130,14 @@ def test_view_get_all_analises(client, create_models):
     serializer = AnaliseSerializer(analises, many=True)
 
     assert response.data == serializer.data
+    assert response.status_code == status.HTTP_200_OK
+
+
+@pytest.mark.django_db
+def test_view_search_anlise_by_name(client, create_models):
+    url = "http://127.0.0.1:8000/api/v1/analises/?search=teste2/"
+    response = client.get(url)
+    assert response
     assert response.status_code == status.HTTP_200_OK
 
 
