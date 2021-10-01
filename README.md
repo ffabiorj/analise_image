@@ -71,8 +71,4 @@ pytest
 
 [Django](https://docs.djangoproject.com/)
 
-[Codecov](https://codecov.io/)
-
-[Travis](https://travis-ci.com/)
-
 [Django Rest Framework](https://www.django-rest-framework.org/)
