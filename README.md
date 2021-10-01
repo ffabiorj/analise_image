@@ -35,7 +35,7 @@
 
 ### Endpoints da api
 
-- http://127.0.0.1/api/v1/imagens/ # retorna todas as imagens
+- http://127.0.0.1:8000/api/v1/imagens/ # retorna todas as imagens
 - http://127.0.0.1:8000/api/v1/imagens/id/ # retorna uma imagem pelo id
 - http://127.0.0.1:8000/api/v1/analises/ # retorna todas as analises
 - http://127.0.0.1:8000/api/v1/analises/id/ # retorna uma analise pelo id
