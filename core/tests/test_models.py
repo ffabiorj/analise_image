@@ -1,56 +1,70 @@
 import pytest
-from core.models import Image, Analise
+from core.models import Imagem, Analise
 from datetime import datetime
+from io import BytesIO
+from PIL import Image
+from django.core.files.uploadedfile import SimpleUploadedFile
+
+
+# Estou tendo com problema com pytest, por isso repetir
+# a função aqui no testes
+def create_image():
+    image = BytesIO()
+    Image.new('RGB', (100, 100)).save(image, 'JPEG')
+    image.seek(0)
+    image_memory = SimpleUploadedFile('image.jpg', image.getvalue())
+    return image_memory
+
+
+imagem_memory = create_image()
 
 
 @pytest.mark.django_db
 def test_get_file_name():
-    Image.objects.create(
-        name="teste",
-        image=""
+    Imagem.objects.create(
+        nome="teste",
+        imagem=imagem_memory
     )
-    assert Image.objects.get(name="teste").name == "teste"
+    assert Imagem.objects.get(nome="teste").nome == "teste"
 
 
 @pytest.mark.django_db
 def test_has_one_image():
-    Image.objects.create(
-        name="teste",
-        image=""
+    Imagem.objects.create(
+        nome="teste",
+        imagem=imagem_memory
     )
-    assert Image.objects.count() == 1
+    assert Imagem.objects.count() == 1
 
 
 @pytest.mark.django_db
 def test_get_analise_name():
-    image = Image.objects.create(
-        name="teste",
-        image=""
+    imagem = Imagem.objects.create(
+        nome="teste",
+        imagem=imagem_memory
     )
 
     Analise.objects.create(
-        name="teste",
-        image=image,
-        type="teste",
-        created_at=datetime.now(),
-        updated_at=datetime.now(),
+        nome="teste",
+        imagem=imagem,
+        tipo="teste",
         status="A"
     )
-    assert Analise.objects.get(name="teste").name == "teste"
+    assert Analise.objects.get(nome="teste").nome == "teste"
 
 
 @pytest.mark.django_db
 def test_has_one_analise():
-    image = Image.objects.create(
-        name="teste",
-        image=""
+    imagem = Imagem.objects.create(
+        nome="teste",
+        imagem=""
     )
     Analise.objects.create(
-        name="teste",
-        image=image,
-        type="teste",
-        created_at=datetime.now(),
-        updated_at=datetime.now(),
+        nome="teste",
+        imagem=imagem,
+        tipo="teste",
+        criado_em=datetime.now(),
+        atualizado_em=datetime.now(),
         status="A"
     )
-    assert Image.objects.count() == 1
+    assert Imagem.objects.count() == 1
